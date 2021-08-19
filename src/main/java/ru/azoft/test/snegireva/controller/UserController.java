@@ -7,16 +7,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.azoft.test.snegireva.models.User;
-import ru.azoft.test.snegireva.service.UserRegistrar;
+import ru.azoft.test.snegireva.service.receiver.UserReceiver;
+import ru.azoft.test.snegireva.service.registrar.UserRegistrar;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     private final UserRegistrar registrar;
+    private final UserReceiver receiver;
 
-    public UserController(@Qualifier("userRegistrar") UserRegistrar registrar) {
+    public UserController(@Qualifier("userRegistrar") UserRegistrar registrar,
+                          @Qualifier("userReceiver") UserReceiver receiver) {
         this.registrar = registrar;
+        this.receiver = receiver;
     }
 
     @PostMapping("/register")
@@ -37,7 +41,11 @@ public class UserController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") String userId){
-        registrar.getMessage(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(new User());
+        if (userId == null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        User user = receiver.getUser(userId);
+        if (user == null)
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }

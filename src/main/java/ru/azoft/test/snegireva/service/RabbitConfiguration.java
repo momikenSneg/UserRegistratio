@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
 
+    public static final String SAVE_USER_QUEUE = "save_user_queue";
+    public static final String GET_USER_QUEUE = "get_user_queue";
+
     @Bean
     public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");
@@ -28,12 +31,12 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public Queue myQueue1() {
-        return new Queue("queue1");
+    public Queue saveUserQueue() {
+        return new Queue(SAVE_USER_QUEUE);
     }
 
     @Bean
-    public Queue myQueue2() {
-        return new Queue("query-example-6");
+    public Queue getUserQueue() {
+        return new Queue(GET_USER_QUEUE);
     }
 }

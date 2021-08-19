@@ -1,13 +1,17 @@
-package ru.azoft.test.snegireva.service;
+package ru.azoft.test.snegireva.service.registrar;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.azoft.test.snegireva.models.User;
+import ru.azoft.test.snegireva.service.RabbitConfiguration;
+
+import java.sql.Date;
+import java.util.UUID;
 
 @Service
 @Qualifier("userRegistrar")
-public class MessageBrokerUserRegistrar implements UserRegistrar{
+public class MessageBrokerUserRegistrar implements UserRegistrar {
 
     final private AmqpTemplate template;
 
@@ -17,12 +21,9 @@ public class MessageBrokerUserRegistrar implements UserRegistrar{
 
     @Override
     public String register(User user){
-        template.convertAndSend("queue1", user.getEmail());
-        return "Emit to queue";
-    }
-
-    public String getMessage(String message){
-
-        return (String) template.convertSendAndReceive("query-example-6",message);
+        user.setID(UUID.randomUUID().toString());
+        user.setRegistrationDate(new Date(System.currentTimeMillis()));
+        template.convertAndSend(RabbitConfiguration.SAVE_USER_QUEUE, user);
+        return user.getID();
     }
 }
