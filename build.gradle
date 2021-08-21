@@ -20,7 +20,7 @@ dependencies {
     implementation 'org.springframework.amqp:spring-rabbit:2.3.10'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.projectlombok:lombok:1.18.18'
-    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql:42.1.4'
 
     implementation 'commons-validator:commons-validator:1.7'
 
