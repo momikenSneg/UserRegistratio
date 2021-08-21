@@ -1,11 +1,11 @@
-package ru.azoft.test.snegireva.service;
+package ru.azoft.test.service;
 
 import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import ru.azoft.test.snegireva.models.User;
-import ru.azoft.test.snegireva.repository.UserRepository;
+import ru.azoft.test.models.User;
+import ru.azoft.test.repository.UserRepository;
 
 @EnableRabbit
 @Component

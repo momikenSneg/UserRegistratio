@@ -1,4 +1,4 @@
-package ru.azoft.test.snegireva.controller;
+package ru.azoft.test.controller;
 
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.azoft.test.snegireva.models.User;
-import ru.azoft.test.snegireva.service.receiver.UserReceiver;
-import ru.azoft.test.snegireva.service.registrar.UserRegistrar;
+import ru.azoft.test.models.User;
+import ru.azoft.test.service.receiver.UserReceiver;
+import ru.azoft.test.service.registrar.UserRegistrar;
 
 @Controller
 @RequestMapping("/user")
@@ -45,7 +45,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         User user = receiver.getUser(userId);
         if (user == null)
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }

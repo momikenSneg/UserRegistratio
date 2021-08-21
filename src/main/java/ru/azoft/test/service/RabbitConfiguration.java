@@ -1,4 +1,4 @@
-package ru.azoft.test.snegireva.service;
+package ru.azoft.test.service;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
