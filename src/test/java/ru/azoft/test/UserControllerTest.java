@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.Assert;
+import ru.azoft.test.controller.UserController;
 import ru.azoft.test.models.User;
 import ru.azoft.test.service.receiver.UserReceiver;
 import ru.azoft.test.service.registrar.UserRegistrar;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = {Main.class})
+@SpringBootTest(classes = {UserController.class})
 @AutoConfigureMockMvc
 public class UserControllerTest {
     @Autowired
