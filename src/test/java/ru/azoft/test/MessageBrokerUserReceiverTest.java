@@ -22,18 +22,13 @@ public class MessageBrokerUserReceiverTest {
     @Autowired
     MessageBrokerUserReceiver receiver;
 
-    User user;
-
-    @BeforeEach
-    public void init(){
-        user = new User("id",
-                "login",
-                "password",
-                "Name",
-                "Surname",
-                "email@email.com",
-                new Date(System.currentTimeMillis()));
-    }
+    User user = new User("id",
+            "login",
+            "password",
+            "Name",
+            "Surname",
+            "email@email.com",
+            new Date(System.currentTimeMillis()));
 
     @Test
     public void testRightUser(){
